@@ -17,20 +17,20 @@
 <style>
 	/* container heading 1 */
 	section {
-		display: flex;
-		gap: 1rem;
-		align-items: center;
-		background-color: var(--c-container);
-		padding: 2em;
-		border-top: 12px solid var(--c-pink);
-		margin: 1em 1em;
-		border-radius: 0.5em;
-	}
+    display: flex;
+    align-items: center;
+    border-radius: 0.5em;
+    background-color: var(--c-container);
+    gap: 1rem;
+    padding: 2em;
+    border-top: 12px solid var(--c-pink);
+    margin: 1em 1em;
+}
 
-	section img {
-		/* padding: .5rem; */
-		box-shadow: 0px 0px 0px 8px #202020;
-		border-radius: 0.3rem;
-		background-color: #202020;
-	}
+section img {
+    border-radius: 0.3rem;
+    background-color: #202020;
+    /* padding: .5rem; */
+    box-shadow: 0px 0px 0px 8px #202020;
+}
 </style>
