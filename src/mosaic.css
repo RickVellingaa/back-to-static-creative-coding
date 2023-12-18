@@ -41,13 +41,8 @@ html {
 
 body {
 	min-height: 100%;
-	color: var(--c-white);
-	background-color: var(--c-background);
-}
-
-main {
-	min-height: 100%;
-	height: 100%;
+	/* color: black !important;
+	background-color: white !important; */
 }
 
 /* Text styles */

@@ -1,204 +1,92 @@
 <script>
+	import { gsap } from 'gsap/dist/gsap';
+	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+	import noise from '$lib/assets/noise.png';
+
+	import { onMount } from 'svelte';
+
+	import Mosaic from '$lib/components/Mosaic.svelte';
 	export let data;
+	gsap.registerPlugin(ScrollTrigger);
+
+	onMount(() => {
+		let tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: 'ul.bg',
+				start: `-10% top`,
+				end: `200% bottom`,
+				scrub: 1,
+				markers: false
+			}
+		});
+		tl.to('ul.bg', {
+			y: 900
+		});
+	});
 </script>
 
-<section>
-	<div>
-		<ul>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>1</figcaption>
-					</figure>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>2</figcaption>
-					</figure>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>3</figcaption>
-					</figure>
-				</a>
-			</li>
-		</ul>
-		<ul>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>1</figcaption>
-					</figure>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>2</figcaption>
-					</figure>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>3</figcaption>
-					</figure>
-				</a>
-			</li>
-		</ul>
-		<ul>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>1</figcaption>
-					</figure>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>2</figcaption>
-					</figure>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>3</figcaption>
-					</figure>
-				</a>
-			</li>
-		</ul>
-	</div>
-	<div>
-		<ul>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>1</figcaption>
-					</figure>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>2</figcaption>
-					</figure>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>3</figcaption>
-					</figure>
-				</a>
-			</li>
-		</ul>
-		<ul>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>1</figcaption>
-					</figure>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>2</figcaption>
-					</figure>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>3</figcaption>
-					</figure>
-				</a>
-			</li>
-		</ul>
-		<ul>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>1</figcaption>
-					</figure>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>2</figcaption>
-					</figure>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<figure>
-						<figcaption>3</figcaption>
-					</figure>
-				</a>
-			</li>
-		</ul>
+<section style="background-image: url({noise});">
+	<ul>
+		{#each data.websites as website}
+			<Mosaic {website} layer="voor" />
+		{/each}
+	</ul>
+
+	<ul class="bg">
+		{#each data.websites.reverse() as website}
+			<Mosaic {website} layer="achter" />
+		{/each}
+	</ul>
+
+	<div class="circle" style="background-image: url({noise});">
+		<span />
+		<span />
+		<span />
 	</div>
 </section>
 
 <style>
 	* {
 		box-sizing: border-box;
-		margin: 0;
-		padding: 0;
-	}
-	section {
-		position: relative;
-		width: 1680px;
-		margin-left: auto;
-		margin-right: auto;
-		height: calc(100vh - 90px);
 	}
 
-	div {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		grid-gap: 0 10rem, 0.5rem;
-		gap: 0 10rem, 0.5rem;
+	section {
+		position: relative;
+		height: calc(220vh - 92px);
 		width: 100%;
-		height: 100%;
-		padding: 0em 1.5em;
+		max-width: 100vw;
+		margin: 0 auto 10rem auto;
+		overflow-y: hidden;
+		overflow: hidden;
 	}
 
 	ul {
-		height: 100%;
-		width: 100%;
-		list-style: none;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-around;
-		align-items: center;
-		gap: 1em;
-		padding: 0 2em;
-	}
-
-	li {
-		width: 100%;
-		aspect-ratio: 2.5/1;
-		background-color: red;
-	}
-
-	a {
-		color: white;
-		text-decoration: none;
-	}
-
-	/* Background containers */
-
-	section > div:nth-child(2) {
 		position: absolute;
-		left: 0;
-		top: 0;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		column-gap: 5%;
+		width: 100%;
+		/* top: 0; */
+		left: 50%;
+		/* transform: translateX(-50%); */
+		margin-left: -50%;
+		overflow: hidden;
+		padding: 0 10em;
+		padding-bottom: 5em;
+	}
+
+	ul.bg {
+		/* top: -20rem; */
+		column-gap: 3%;
+		/* z-index: -1; */
+		opacity: 0.8;
+		outline: none;
+		/* pointer-events: none; */
+	}
+
+	@media only screen and (max-width: 700px) {
+		ul {
+			grid-template-columns: repeat(2, 1fr);
+		}
 	}
 </style>

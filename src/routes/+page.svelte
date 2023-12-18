@@ -8,12 +8,12 @@
 	// form submit
 	let input;
 	function submit() {
-		let websites = document.querySelectorAll('.website')
+		let websites = document.querySelectorAll('.website');
 
-		websites.forEach(website => {
-			if(!website.innerText.toUpperCase().includes(input.toUpperCase())){
+		websites.forEach((website) => {
+			if (!website.innerText.toUpperCase().includes(input.toUpperCase())) {
 				website.classList.add('container-off');
-			}else{
+			} else {
 				website.classList.remove('container-off');
 			}
 		});
