@@ -42,6 +42,7 @@ html {
 body {
 	min-height: 100%;
 	color: var(--c-white);
+	overflow: hidden;
 	background-color: var(--c-background);
 }
 
